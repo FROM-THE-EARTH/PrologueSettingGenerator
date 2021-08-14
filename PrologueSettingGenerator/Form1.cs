@@ -31,6 +31,7 @@ namespace PrologueSettingGenerator
         }
         public class Simulation
         {
+            public decimal dt { get; set; } //delta time
             public decimal detect_peak_threshold { get; set; } //頂点検知によるパラシュート開傘時、最高高度から何m落下したら開傘するかどうか[m]
             public Scatter scatter { get; set; }
             public Simulation()
@@ -64,6 +65,7 @@ namespace PrologueSettingGenerator
                 {
                     processing.multi_thread = document.RootElement.GetProperty("processing").GetProperty("multi_thread").GetBoolean();
 
+                    simulation.dt = document.RootElement.GetProperty("simulation").GetProperty("dt").GetDecimal();
                     simulation.detect_peak_threshold = document.RootElement.GetProperty("simulation").GetProperty("detect_peak_threshold").GetDecimal();
 
                     simulation.scatter.wind_speed_min = document.RootElement.GetProperty("simulation").GetProperty("scatter").GetProperty("wind_speed_min").GetDecimal();
@@ -256,6 +258,7 @@ namespace PrologueSettingGenerator
                     current_setting.ReadJson(text);
 
                     multi_thread.Checked = current_setting.processing.multi_thread;
+                    dt.Value = current_setting.simulation.dt;
                     detect_peak_threshold.Value = current_setting.simulation.detect_peak_threshold;
                     wind_speed_min.Value = current_setting.simulation.scatter.wind_speed_min;
                     wind_speed_max.Value = current_setting.simulation.scatter.wind_speed_max;
@@ -381,6 +384,7 @@ namespace PrologueSettingGenerator
             Setting new_setting = new Setting();
 
             new_setting.processing.multi_thread = multi_thread.Checked;
+            new_setting.simulation.dt = dt.Value;
             new_setting.simulation.detect_peak_threshold = detect_peak_threshold.Value;
             new_setting.simulation.scatter.wind_speed_min = wind_speed_min.Value;
             new_setting.simulation.scatter.wind_speed_max = wind_speed_max.Value;

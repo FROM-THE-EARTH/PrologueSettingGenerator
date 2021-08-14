@@ -32,6 +32,7 @@
             this.settings = new System.Windows.Forms.GroupBox();
             this.setting_write = new System.Windows.Forms.Button();
             this.wind_model = new System.Windows.Forms.GroupBox();
+            this.realdata_filename_select = new System.Windows.Forms.ComboBox();
             this.power_constant = new System.Windows.Forms.NumericUpDown();
             this.realdata_filename_label = new System.Windows.Forms.Label();
             this.type = new System.Windows.Forms.ComboBox();
@@ -68,6 +69,8 @@
             this.rail_len_label = new System.Windows.Forms.Label();
             this.place_label = new System.Windows.Forms.Label();
             this.parameter = new System.Windows.Forms.GroupBox();
+            this.motor_file_select = new System.Windows.Forms.ComboBox();
+            this.airspeed_param_file_select = new System.Windows.Forms.ComboBox();
             this.Cna = new System.Windows.Forms.NumericUpDown();
             this.Cd_alpha2_rad2 = new System.Windows.Forms.Label();
             this.Cp_alpha_mrad = new System.Windows.Forms.Label();
@@ -134,9 +137,9 @@
             this.experiment_date_label = new System.Windows.Forms.Label();
             this.rocket_name_label = new System.Windows.Forms.Label();
             this.team_name_label = new System.Windows.Forms.Label();
-            this.realdata_filename_select = new System.Windows.Forms.ComboBox();
-            this.airspeed_param_file_select = new System.Windows.Forms.ComboBox();
-            this.motor_file_select = new System.Windows.Forms.ComboBox();
+            this.dt_label = new System.Windows.Forms.Label();
+            this.dt = new System.Windows.Forms.NumericUpDown();
+            this.dt_s = new System.Windows.Forms.Label();
             this.settings.SuspendLayout();
             this.wind_model.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.power_constant)).BeginInit();
@@ -174,6 +177,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.experiment_date_date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.experiment_date_month)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.experiment_date_year)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt)).BeginInit();
             this.SuspendLayout();
             // 
             // settings
@@ -210,12 +214,20 @@
             this.wind_model.Controls.Add(this.type_label);
             this.wind_model.Controls.Add(this.power_constant_label);
             this.wind_model.Dock = System.Windows.Forms.DockStyle.Top;
-            this.wind_model.Location = new System.Drawing.Point(20, 224);
+            this.wind_model.Location = new System.Drawing.Point(20, 255);
             this.wind_model.Name = "wind_model";
             this.wind_model.Size = new System.Drawing.Size(736, 100);
             this.wind_model.TabIndex = 3;
             this.wind_model.TabStop = false;
             this.wind_model.Text = "風モデル";
+            // 
+            // realdata_filename_select
+            // 
+            this.realdata_filename_select.FormattingEnabled = true;
+            this.realdata_filename_select.Location = new System.Drawing.Point(128, 68);
+            this.realdata_filename_select.Name = "realdata_filename_select";
+            this.realdata_filename_select.Size = new System.Drawing.Size(309, 20);
+            this.realdata_filename_select.TabIndex = 15;
             // 
             // power_constant
             // 
@@ -279,6 +291,9 @@
             // 
             // simulation
             // 
+            this.simulation.Controls.Add(this.dt_s);
+            this.simulation.Controls.Add(this.dt);
+            this.simulation.Controls.Add(this.dt_label);
             this.simulation.Controls.Add(this.detect_peak_threshold);
             this.simulation.Controls.Add(this.scatter);
             this.simulation.Controls.Add(this.detect_peak_threshold_m);
@@ -286,7 +301,7 @@
             this.simulation.Dock = System.Windows.Forms.DockStyle.Top;
             this.simulation.Location = new System.Drawing.Point(20, 78);
             this.simulation.Name = "simulation";
-            this.simulation.Size = new System.Drawing.Size(736, 146);
+            this.simulation.Size = new System.Drawing.Size(736, 177);
             this.simulation.TabIndex = 2;
             this.simulation.TabStop = false;
             this.simulation.Text = "シミュレーション";
@@ -295,7 +310,7 @@
             // 
             this.detect_peak_threshold.Cursor = System.Windows.Forms.Cursors.Default;
             this.detect_peak_threshold.DecimalPlaces = 1;
-            this.detect_peak_threshold.Location = new System.Drawing.Point(138, 16);
+            this.detect_peak_threshold.Location = new System.Drawing.Point(140, 48);
             this.detect_peak_threshold.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -322,7 +337,7 @@
             this.scatter.Controls.Add(this.wind_speed_max_label);
             this.scatter.Controls.Add(this.wind_speed_min_label);
             this.scatter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.scatter.Location = new System.Drawing.Point(3, 46);
+            this.scatter.Location = new System.Drawing.Point(3, 77);
             this.scatter.Name = "scatter";
             this.scatter.Size = new System.Drawing.Size(730, 97);
             this.scatter.TabIndex = 3;
@@ -443,7 +458,7 @@
             // detect_peak_threshold_m
             // 
             this.detect_peak_threshold_m.AutoSize = true;
-            this.detect_peak_threshold_m.Location = new System.Drawing.Point(200, 19);
+            this.detect_peak_threshold_m.Location = new System.Drawing.Point(208, 50);
             this.detect_peak_threshold_m.Name = "detect_peak_threshold_m";
             this.detect_peak_threshold_m.Size = new System.Drawing.Size(14, 12);
             this.detect_peak_threshold_m.TabIndex = 2;
@@ -452,7 +467,7 @@
             // detect_peak_threshold_label
             // 
             this.detect_peak_threshold_label.AutoSize = true;
-            this.detect_peak_threshold_label.Location = new System.Drawing.Point(7, 19);
+            this.detect_peak_threshold_label.Location = new System.Drawing.Point(9, 50);
             this.detect_peak_threshold_label.Name = "detect_peak_threshold_label";
             this.detect_peak_threshold_label.Size = new System.Drawing.Size(125, 12);
             this.detect_peak_threshold_label.TabIndex = 0;
@@ -714,6 +729,23 @@
             this.parameter.TabIndex = 1;
             this.parameter.TabStop = false;
             this.parameter.Text = "パラメーター";
+            // 
+            // motor_file_select
+            // 
+            this.motor_file_select.FormattingEnabled = true;
+            this.motor_file_select.Location = new System.Drawing.Point(113, 397);
+            this.motor_file_select.Name = "motor_file_select";
+            this.motor_file_select.Size = new System.Drawing.Size(617, 20);
+            this.motor_file_select.TabIndex = 53;
+            // 
+            // airspeed_param_file_select
+            // 
+            this.airspeed_param_file_select.FormattingEnabled = true;
+            this.airspeed_param_file_select.Location = new System.Drawing.Point(157, 574);
+            this.airspeed_param_file_select.Name = "airspeed_param_file_select";
+            this.airspeed_param_file_select.Size = new System.Drawing.Size(573, 20);
+            this.airspeed_param_file_select.TabIndex = 52;
+            this.airspeed_param_file_select.SelectedIndexChanged += new System.EventHandler(this.airspeed_param_file_select_SelectedIndexChanged);
             // 
             // Cna
             // 
@@ -1586,30 +1618,52 @@
             this.team_name_label.TabIndex = 0;
             this.team_name_label.Text = "チーム名";
             // 
-            // realdata_filename_select
+            // dt_label
             // 
-            this.realdata_filename_select.FormattingEnabled = true;
-            this.realdata_filename_select.Location = new System.Drawing.Point(128, 68);
-            this.realdata_filename_select.Name = "realdata_filename_select";
-            this.realdata_filename_select.Size = new System.Drawing.Size(309, 20);
-            this.realdata_filename_select.TabIndex = 15;
+            this.dt_label.AutoSize = true;
+            this.dt_label.Location = new System.Drawing.Point(10, 25);
+            this.dt_label.Name = "dt_label";
+            this.dt_label.Size = new System.Drawing.Size(77, 12);
+            this.dt_label.TabIndex = 5;
+            this.dt_label.Text = "解析単位時間";
             // 
-            // airspeed_param_file_select
+            // dt
             // 
-            this.airspeed_param_file_select.FormattingEnabled = true;
-            this.airspeed_param_file_select.Location = new System.Drawing.Point(157, 574);
-            this.airspeed_param_file_select.Name = "airspeed_param_file_select";
-            this.airspeed_param_file_select.Size = new System.Drawing.Size(573, 20);
-            this.airspeed_param_file_select.TabIndex = 52;
-            this.airspeed_param_file_select.SelectedIndexChanged += new System.EventHandler(this.airspeed_param_file_select_SelectedIndexChanged);
+            this.dt.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dt.DecimalPlaces = 3;
+            this.dt.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.dt.Location = new System.Drawing.Point(91, 23);
+            this.dt.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.dt.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.dt.Name = "dt";
+            this.dt.Size = new System.Drawing.Size(56, 19);
+            this.dt.TabIndex = 6;
+            this.dt.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
             // 
-            // motor_file_select
+            // dt_s
             // 
-            this.motor_file_select.FormattingEnabled = true;
-            this.motor_file_select.Location = new System.Drawing.Point(113, 397);
-            this.motor_file_select.Name = "motor_file_select";
-            this.motor_file_select.Size = new System.Drawing.Size(617, 20);
-            this.motor_file_select.TabIndex = 53;
+            this.dt_s.AutoSize = true;
+            this.dt_s.Location = new System.Drawing.Point(155, 25);
+            this.dt_s.Name = "dt_s";
+            this.dt_s.Size = new System.Drawing.Size(11, 12);
+            this.dt_s.TabIndex = 7;
+            this.dt_s.Text = "s";
             // 
             // PrologueSettingGeneratorForm
             // 
@@ -1671,6 +1725,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.experiment_date_date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.experiment_date_month)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.experiment_date_year)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1785,6 +1840,9 @@
         private System.Windows.Forms.ComboBox realdata_filename_select;
         private System.Windows.Forms.ComboBox airspeed_param_file_select;
         private System.Windows.Forms.ComboBox motor_file_select;
+        private System.Windows.Forms.Label dt_label;
+        private System.Windows.Forms.NumericUpDown dt;
+        private System.Windows.Forms.Label dt_s;
     }
 }
 
